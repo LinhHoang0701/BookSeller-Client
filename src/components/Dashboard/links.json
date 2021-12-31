@@ -1,0 +1,12 @@
+{
+  "ROLE_ADMIN": [
+    { "to": "", "name": "Account Details" },
+    { "to": "/security", "name": "Account Security" },
+    { "to": "/product", "name": "Products" },
+    { "to": "/users", "name": "Users" }
+  ],
+  "ROLE_MEMBER": [
+    { "to": "", "name": "Account Details" },
+    { "to": "/security", "name": "Account Security" }
+  ]
+}
