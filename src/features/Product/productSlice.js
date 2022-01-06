@@ -13,7 +13,7 @@ const initialState = {
     max: 500,
     order: 0,
     pageNumber: 1,
-    sortOrder: { price: -1 },
+    sortOrder: { _id: -1 },
   },
   err: "",
 };

@@ -26,8 +26,8 @@ export function* getProfileSaga() {
 }
 export function* updateProfileSaga(action) {
   try {
-    const {body, history} = action.payload;
-    const res = yield call(userApi.updateProfile, body);
+    const { values, history } = action.payload;
+    const res = yield call(userApi.updateProfile, values);
     yield put({
       type: updateProfileBySaga.type,
       payload: res,
@@ -67,7 +67,7 @@ export function* searchUserSaga(action) {
   } catch (errors) {
     yield put({
       type: error.type,
-      payload: errors.response.data.errors,
+      payload: errors.response.data.error,
     });
   }
 }

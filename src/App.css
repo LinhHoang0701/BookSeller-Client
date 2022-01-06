@@ -155,7 +155,9 @@ input[type="submit"] {
   border-radius: 3px;
   height: 100%;
 }
-
+.page-item.active a {
+  color: #fff !important;
+}
 .product-list .product-container .item-box {
   height: 100%;
   position: relative;

@@ -21,8 +21,7 @@ const FormLogin = () => {
       .required("Enter your email please!"),
     password: Yup.string()
       .required("Enter password please!")
-      .min(8, "Password is too short - should be 8 chars minimum.")
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+      .min(8, "Password is too short - should be 8 chars minimum."),
   });
 
   const handleSubmit = (values) => {

@@ -5,9 +5,9 @@ export const userApi = {
     const url = "/user";
     return axiosClient.get(url);
   },
-  updateProfile: (body) => {
+  updateProfile: (values) => {
     const url = "/user";
-    return axiosClient.put(url, { profile: body });
+    return axiosClient.put(url, { profile: values });
   },
   getAll: () => {
     const url = "/user/search";

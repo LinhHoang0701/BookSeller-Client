@@ -3,16 +3,45 @@ import "rc-slider/assets/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Slider from "rc-slider";
-import { rangePrice } from "../productSlice";
+
+import { getProduct, rangePrice } from "../productSlice";
+import SelectOption from "../../../components/Common/SelectOption";
+
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
+const sortOptions = [
+  { value: 0, label: "Newest First" },
+  { value: 1, label: "Price High to Low" },
+  { value: 2, label: "Price Low to High" },
+];
+
 const ListProducts = () => {
-  const { products, totalProducts, page } = useSelector(
+  const { products, totalProducts, page, filter } = useSelector(
     (state) => state.product
   );
-
   const dispatch = useDispatch();
+
+  const handleChangeSelect = (option) => {
+    const { value } = option;
+    if (value === 1) {
+      dispatch({
+        type: getProduct.type,
+        payload: { ...filter, order: value, sortOrder: { price: -1 } },
+      });
+    } else if (value === 2) {
+      dispatch({
+        type: getProduct.type,
+        payload: { ...filter, order: value, sortOrder: { price: 1 } },
+      });
+    } else {
+      dispatch({
+        type: getProduct.type,
+        payload: { ...filter, order: value, sortOrder: { _id: -1 } },
+      });
+    }
+  };
+
   return (
     <>
       <div className="row row-cols-12">
@@ -58,6 +87,15 @@ const ListProducts = () => {
                   : totalProducts
               } products of ${totalProducts} products`}
             </div>
+            <div className="text-right pr-0 d-none d-md-block col-12 order-2 col-sm-12 order-sm-2 col-md-2 order-md-2 col-lg-2 order-lg-2">
+              <b>Sort by</b>
+            </div>
+            <div className="col-12 order-2 col-sm-12 order-sm-2 col-md-5 order-md-2 col-lg-4 order-lg-2">
+              <SelectOption
+                options={sortOptions}
+                onChange={handleChangeSelect}
+              />
+            </div>
           </div>
           <div className="products-shop">
             <div className="product-list">
@@ -75,7 +113,6 @@ const ListProducts = () => {
                               <div className="item-image-box">
                                 <img
                                   src={product.image}
-                                  alt=""
                                   className="item-image"
                                 />
                               </div>
